@@ -1,0 +1,25 @@
+# Function to plot and save gender distribution
+plot_gender_dist <- function(tmp_recommendations_df, plotname) {
+    tmp_plotname <- paste(plotname, "_distrstribution_authors_itembased.png")
+    tmp_title <- paste("Distribution Authors (", plotname, ")")
+    plot <- tmp_recommendations_df %>% 
+        ggplot(aes(x = gender, fill = gender)) + 
+        geom_bar() +
+        theme(panel.background = element_rect(fill="#0e293c", 
+            colour = "#0e293c", size = 0.5, linetype = 'solid'),
+            panel.grid.minor= element_blank(),
+            panel.grid.major.x = element_blank(),
+            plot.background = element_rect(fill = "#0e293c"),
+            axis.title.y = element_text(colour = "white"),
+            axis.text.y=element_text(colour ="white"),
+            axis.text.x=element_blank(),
+            axis.title.x=element_blank(), 
+            legend.text = element_text(colour ="white"),
+            legend.background = element_rect(fill = "#0e293c"),
+            legend.title = element_text(colour ="white"),
+            plot.title = element_text(colour ="white", hjust= 0.5)) +
+            labs(title = tmp_title, y = "Number of Authors") +
+        scale_fill_manual(values=c("female"="#1ed7be","male"="#19bbd5"))
+        ggsave(tmp_plotname)
+    print(plot)
+}
